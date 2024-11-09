@@ -1,0 +1,1084 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDFarmaciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="IDCategoria" />
+          </Key>
+          <Property Name="IDCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombrecategoria" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+          </Key>
+          <Property Name="IDCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Documento" Type="bigint" Nullable="false" />
+          <Property Name="Telefono" Type="bigint" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="varchar(max)" Nullable="false" />
+          <Property Name="Direccion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DESCUENTOS">
+          <Key>
+            <PropertyRef Name="IDDescuento" />
+          </Key>
+          <Property Name="IDDescuento" Type="int" Nullable="false" />
+          <Property Name="IDCliente" Type="int" />
+          <Property Name="PorcentajeDescuento" Type="float" />
+          <Property Name="FechaExpiracion" Type="date" />
+        </EntityType>
+        <EntityType Name="DOMICILIOS">
+          <Key>
+            <PropertyRef Name="IDDomicilios" />
+          </Key>
+          <Property Name="IDDomicilios" Type="int" Nullable="false" />
+          <Property Name="IDCliente" Type="int" />
+          <Property Name="FechaEntrega" Type="date" />
+          <Property Name="DireccionEntrega" Type="varchar" MaxLength="30" />
+          <Property Name="TotalPago" Type="money" />
+        </EntityType>
+        <EntityType Name="FARMACEUTA">
+          <Key>
+            <PropertyRef Name="IDFarmaceuta" />
+          </Key>
+          <Property Name="IDFarmaceuta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Documento" Type="bigint" />
+          <Property Name="IDSucursal" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" />
+          <Property Name="Cargo" Type="varchar" MaxLength="20" />
+          <Property Name="Telefono" Type="bigint" />
+          <Property Name="Correo" Type="varchar" MaxLength="30" />
+          <Property Name="FechaContratacion" Type="date" />
+        </EntityType>
+        <EntityType Name="HISTORIALVENTAS">
+          <Key>
+            <PropertyRef Name="IDHistorial" />
+          </Key>
+          <Property Name="IDHistorial" Type="int" Nullable="false" />
+          <Property Name="IDCliente" Type="int" />
+          <Property Name="IDProducto" Type="int" />
+          <Property Name="FechaCompra" Type="date" />
+          <Property Name="CantidadComprada" Type="int" />
+          <Property Name="ValorUnitario" Type="money" />
+        </EntityType>
+        <EntityType Name="INVENTARIO">
+          <Key>
+            <PropertyRef Name="IDInventario" />
+          </Key>
+          <Property Name="IDInventario" Type="int" Nullable="false" />
+          <Property Name="IDProducto" Type="int" />
+          <Property Name="IDSucursal" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="FechaIngreso" Type="date" />
+          <Property Name="FechaVencimiento" Type="date" />
+        </EntityType>
+        <EntityType Name="INYECTOLOGIA">
+          <Key>
+            <PropertyRef Name="IDInyectologia" />
+            <PropertyRef Name="IDServicio" />
+            <PropertyRef Name="IDFarmaceuta" />
+          </Key>
+          <Property Name="IDInyectologia" Type="int" Nullable="false" />
+          <Property Name="IDServicio" Type="int" Nullable="false" />
+          <Property Name="IDFarmaceuta" Type="int" Nullable="false" />
+          <Property Name="FechaInyeccion" Type="date" />
+        </EntityType>
+        <EntityType Name="PAGOS">
+          <Key>
+            <PropertyRef Name="IDPago" />
+          </Key>
+          <Property Name="IDPago" Type="int" Nullable="false" />
+          <Property Name="IDVenta" Type="int" />
+          <Property Name="FechaPago" Type="date" />
+          <Property Name="ValorPago" Type="money" />
+        </EntityType>
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="IDProducto" />
+          </Key>
+          <Property Name="IDProducto" Type="int" Nullable="false" />
+          <Property Name="IDCategoria" Type="int" Nullable="false" />
+          <Property Name="IDProveedor" Type="int" Nullable="false" />
+          <Property Name="Nombreproducto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="Presentacion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cantidad" Type="varchar(max)" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROVEEDORES">
+          <Key>
+            <PropertyRef Name="IDProveedor" />
+          </Key>
+          <Property Name="IDProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombreproveedor" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Telefono" Type="bigint" Nullable="false" />
+          <Property Name="Correo" Type="varchar(max)" Nullable="false" />
+          <Property Name="Direccion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SERVICIOS">
+          <Key>
+            <PropertyRef Name="IDServicio" />
+          </Key>
+          <Property Name="IDServicio" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="60" />
+          <Property Name="Tarifa" Type="money" />
+        </EntityType>
+        <EntityType Name="SUCURSAL">
+          <Key>
+            <PropertyRef Name="IDSucursal" />
+          </Key>
+          <Property Name="IDSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreSucursal" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="VENTAS">
+          <Key>
+            <PropertyRef Name="IDVenta" />
+          </Key>
+          <Property Name="IDVenta" Type="int" Nullable="false" />
+          <Property Name="FechaVenta" Type="date" />
+          <Property Name="IDCliente" Type="int" />
+          <Property Name="TotalVenta" Type="money" />
+        </EntityType>
+        <EntityType Name="VENTASPRODUCTOS">
+          <Key>
+            <PropertyRef Name="IDVenta" />
+            <PropertyRef Name="IDProducto" />
+          </Key>
+          <Property Name="IDVenta" Type="int" Nullable="false" />
+          <Property Name="IDProducto" Type="int" Nullable="false" />
+          <Property Name="CantidadVendida" Type="int" />
+          <Property Name="SubTotal" Type="money" />
+        </EntityType>
+        <Association Name="FK__DESCUENTO__Fecha__59FA5E80">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="0..1" />
+          <End Role="DESCUENTOS" Type="Self.DESCUENTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="DESCUENTOS">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DOMICILIO__IDCli__5FB337D6">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="0..1" />
+          <End Role="DOMICILIOS" Type="Self.DOMICILIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="DOMICILIOS">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FARMACEUT__IDSuc__398D8EEE">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="FARMACEUTA" Type="Self.FARMACEUTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="IDSucursal" />
+            </Principal>
+            <Dependent Role="FARMACEUTA">
+              <PropertyRef Name="IDSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__IDPro__797309D9">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="0..1" />
+          <End Role="HISTORIALVENTAS" Type="Self.HISTORIALVENTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="HISTORIALVENTAS">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__Valor__787EE5A0">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="0..1" />
+          <End Role="HISTORIALVENTAS" Type="Self.HISTORIALVENTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="HISTORIALVENTAS">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTARI__Fecha__70DDC3D8">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="0..1" />
+          <End Role="INVENTARIO" Type="Self.INVENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="INVENTARIO">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTARI__IDSuc__71D1E811">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="INVENTARIO" Type="Self.INVENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="IDSucursal" />
+            </Principal>
+            <Dependent Role="INVENTARIO">
+              <PropertyRef Name="IDSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INYECTOLO__IDFar__3E52440B">
+          <End Role="FARMACEUTA" Type="Self.FARMACEUTA" Multiplicity="1" />
+          <End Role="INYECTOLOGIA" Type="Self.INYECTOLOGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FARMACEUTA">
+              <PropertyRef Name="IDFarmaceuta" />
+            </Principal>
+            <Dependent Role="INYECTOLOGIA">
+              <PropertyRef Name="IDFarmaceuta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INYECTOLO__IDSer__3F466844">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
+          <End Role="INYECTOLOGIA" Type="Self.INYECTOLOGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="IDServicio" />
+            </Principal>
+            <Dependent Role="INYECTOLOGIA">
+              <PropertyRef Name="IDServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PAGOS__ValorPago__5CD6CB2B">
+          <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="0..1" />
+          <End Role="PAGOS" Type="Self.PAGOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTAS">
+              <PropertyRef Name="IDVenta" />
+            </Principal>
+            <Dependent Role="PAGOS">
+              <PropertyRef Name="IDVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTOS__IDCat__6D0D32F4">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTOS__IDPro__6E01572D">
+          <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDORES">
+              <PropertyRef Name="IDProveedor" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="IDProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTAS__IDClient__4F7CD00D">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="0..1" />
+          <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="VENTAS">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTASPRO__IDPro__74AE54BC">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="VENTASPRODUCTOS" Type="Self.VENTASPRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="VENTASPRODUCTOS">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTASPRO__IDVen__75A278F5">
+          <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="1" />
+          <End Role="VENTASPRODUCTOS" Type="Self.VENTASPRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTAS">
+              <PropertyRef Name="IDVenta" />
+            </Principal>
+            <Dependent Role="VENTASPRODUCTOS">
+              <PropertyRef Name="IDVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDFarmaciaModelStoreContainer">
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DESCUENTOS" EntityType="Self.DESCUENTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOMICILIOS" EntityType="Self.DOMICILIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FARMACEUTA" EntityType="Self.FARMACEUTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORIALVENTAS" EntityType="Self.HISTORIALVENTAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVENTARIO" EntityType="Self.INVENTARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INYECTOLOGIA" EntityType="Self.INYECTOLOGIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAGOS" EntityType="Self.PAGOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVEEDORES" EntityType="Self.PROVEEDORES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICIOS" EntityType="Self.SERVICIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTAS" EntityType="Self.VENTAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTASPRODUCTOS" EntityType="Self.VENTASPRODUCTOS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DESCUENTO__Fecha__59FA5E80" Association="Self.FK__DESCUENTO__Fecha__59FA5E80">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="DESCUENTOS" EntitySet="DESCUENTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DOMICILIO__IDCli__5FB337D6" Association="Self.FK__DOMICILIO__IDCli__5FB337D6">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="DOMICILIOS" EntitySet="DOMICILIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FARMACEUT__IDSuc__398D8EEE" Association="Self.FK__FARMACEUT__IDSuc__398D8EEE">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="FARMACEUTA" EntitySet="FARMACEUTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__IDPro__797309D9" Association="Self.FK__HISTORIAL__IDPro__797309D9">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="HISTORIALVENTAS" EntitySet="HISTORIALVENTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__Valor__787EE5A0" Association="Self.FK__HISTORIAL__Valor__787EE5A0">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="HISTORIALVENTAS" EntitySet="HISTORIALVENTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTARI__Fecha__70DDC3D8" Association="Self.FK__INVENTARI__Fecha__70DDC3D8">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="INVENTARIO" EntitySet="INVENTARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTARI__IDSuc__71D1E811" Association="Self.FK__INVENTARI__IDSuc__71D1E811">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="INVENTARIO" EntitySet="INVENTARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INYECTOLO__IDFar__3E52440B" Association="Self.FK__INYECTOLO__IDFar__3E52440B">
+            <End Role="FARMACEUTA" EntitySet="FARMACEUTA" />
+            <End Role="INYECTOLOGIA" EntitySet="INYECTOLOGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INYECTOLO__IDSer__3F466844" Association="Self.FK__INYECTOLO__IDSer__3F466844">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="INYECTOLOGIA" EntitySet="INYECTOLOGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PAGOS__ValorPago__5CD6CB2B" Association="Self.FK__PAGOS__ValorPago__5CD6CB2B">
+            <End Role="VENTAS" EntitySet="VENTAS" />
+            <End Role="PAGOS" EntitySet="PAGOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTOS__IDCat__6D0D32F4" Association="Self.FK__PRODUCTOS__IDCat__6D0D32F4">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTOS__IDPro__6E01572D" Association="Self.FK__PRODUCTOS__IDPro__6E01572D">
+            <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTAS__IDClient__4F7CD00D" Association="Self.FK__VENTAS__IDClient__4F7CD00D">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="VENTAS" EntitySet="VENTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTASPRO__IDPro__74AE54BC" Association="Self.FK__VENTASPRO__IDPro__74AE54BC">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="VENTASPRODUCTOS" EntitySet="VENTASPRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTASPRO__IDVen__75A278F5" Association="Self.FK__VENTASPRO__IDVen__75A278F5">
+            <End Role="VENTAS" EntitySet="VENTAS" />
+            <End Role="VENTASPRODUCTOS" EntitySet="VENTASPRODUCTOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDFarmaciaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="IDCategoria" />
+          </Key>
+          <Property Name="IDCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombrecategoria" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK__PRODUCTOS__IDCat__6D0D32F4" FromRole="CATEGORIA" ToRole="PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+          </Key>
+          <Property Name="IDCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Documento" Type="Int64" Nullable="false" />
+          <Property Name="Telefono" Type="Int64" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DESCUENTOS" Relationship="Self.FK__DESCUENTO__Fecha__59FA5E80" FromRole="CLIENTES" ToRole="DESCUENTOS" />
+          <NavigationProperty Name="DOMICILIOS" Relationship="Self.FK__DOMICILIO__IDCli__5FB337D6" FromRole="CLIENTES" ToRole="DOMICILIOS" />
+          <NavigationProperty Name="HISTORIALVENTAS" Relationship="Self.FK__HISTORIAL__Valor__787EE5A0" FromRole="CLIENTES" ToRole="HISTORIALVENTAS" />
+          <NavigationProperty Name="VENTAS" Relationship="Self.FK__VENTAS__IDClient__4F7CD00D" FromRole="CLIENTES" ToRole="VENTAS" />
+        </EntityType>
+        <EntityType Name="DESCUENTO">
+          <Key>
+            <PropertyRef Name="IDDescuento" />
+          </Key>
+          <Property Name="IDDescuento" Type="Int32" Nullable="false" />
+          <Property Name="IDCliente" Type="Int32" />
+          <Property Name="PorcentajeDescuento" Type="Double" />
+          <Property Name="FechaExpiracion" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__DESCUENTO__Fecha__59FA5E80" FromRole="DESCUENTOS" ToRole="CLIENTES" />
+        </EntityType>
+        <EntityType Name="DOMICILIO">
+          <Key>
+            <PropertyRef Name="IDDomicilios" />
+          </Key>
+          <Property Name="IDDomicilios" Type="Int32" Nullable="false" />
+          <Property Name="IDCliente" Type="Int32" />
+          <Property Name="FechaEntrega" Type="DateTime" Precision="0" />
+          <Property Name="DireccionEntrega" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TotalPago" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__DOMICILIO__IDCli__5FB337D6" FromRole="DOMICILIOS" ToRole="CLIENTES" />
+        </EntityType>
+        <EntityType Name="FARMACEUTA">
+          <Key>
+            <PropertyRef Name="IDFarmaceuta" />
+          </Key>
+          <Property Name="IDFarmaceuta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento" Type="Int64" />
+          <Property Name="IDSucursal" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Cargo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="Int64" />
+          <Property Name="Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FechaContratacion" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Self.FK__FARMACEUT__IDSuc__398D8EEE" FromRole="FARMACEUTA" ToRole="SUCURSAL" />
+          <NavigationProperty Name="INYECTOLOGIAs" Relationship="Self.FK__INYECTOLO__IDFar__3E52440B" FromRole="FARMACEUTA" ToRole="INYECTOLOGIA" />
+        </EntityType>
+        <EntityType Name="HISTORIALVENTA">
+          <Key>
+            <PropertyRef Name="IDHistorial" />
+          </Key>
+          <Property Name="IDHistorial" Type="Int32" Nullable="false" />
+          <Property Name="IDCliente" Type="Int32" />
+          <Property Name="IDProducto" Type="Int32" />
+          <Property Name="FechaCompra" Type="DateTime" Precision="0" />
+          <Property Name="CantidadComprada" Type="Int32" />
+          <Property Name="ValorUnitario" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__HISTORIAL__Valor__787EE5A0" FromRole="HISTORIALVENTAS" ToRole="CLIENTES" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__HISTORIAL__IDPro__797309D9" FromRole="HISTORIALVENTAS" ToRole="PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="INVENTARIO">
+          <Key>
+            <PropertyRef Name="IDInventario" />
+          </Key>
+          <Property Name="IDInventario" Type="Int32" Nullable="false" />
+          <Property Name="IDProducto" Type="Int32" />
+          <Property Name="IDSucursal" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="0" />
+          <Property Name="FechaVencimiento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__INVENTARI__Fecha__70DDC3D8" FromRole="INVENTARIO" ToRole="PRODUCTOS" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Self.FK__INVENTARI__IDSuc__71D1E811" FromRole="INVENTARIO" ToRole="SUCURSAL" />
+        </EntityType>
+        <EntityType Name="INYECTOLOGIA">
+          <Key>
+            <PropertyRef Name="IDInyectologia" />
+            <PropertyRef Name="IDServicio" />
+            <PropertyRef Name="IDFarmaceuta" />
+          </Key>
+          <Property Name="IDInyectologia" Type="Int32" Nullable="false" />
+          <Property Name="IDServicio" Type="Int32" Nullable="false" />
+          <Property Name="IDFarmaceuta" Type="Int32" Nullable="false" />
+          <Property Name="FechaInyeccion" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="FARMACEUTA" Relationship="Self.FK__INYECTOLO__IDFar__3E52440B" FromRole="INYECTOLOGIA" ToRole="FARMACEUTA" />
+          <NavigationProperty Name="SERVICIO" Relationship="Self.FK__INYECTOLO__IDSer__3F466844" FromRole="INYECTOLOGIA" ToRole="SERVICIOS" />
+        </EntityType>
+        <EntityType Name="PAGO">
+          <Key>
+            <PropertyRef Name="IDPago" />
+          </Key>
+          <Property Name="IDPago" Type="Int32" Nullable="false" />
+          <Property Name="IDVenta" Type="Int32" />
+          <Property Name="FechaPago" Type="DateTime" Precision="0" />
+          <Property Name="ValorPago" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK__PAGOS__ValorPago__5CD6CB2B" FromRole="PAGOS" ToRole="VENTAS" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="IDProducto" />
+          </Key>
+          <Property Name="IDProducto" Type="Int32" Nullable="false" />
+          <Property Name="IDCategoria" Type="Int32" Nullable="false" />
+          <Property Name="IDProveedor" Type="Int32" Nullable="false" />
+          <Property Name="Nombreproducto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Presentacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantidad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK__PRODUCTOS__IDCat__6D0D32F4" FromRole="PRODUCTOS" ToRole="CATEGORIA" />
+          <NavigationProperty Name="HISTORIALVENTAS" Relationship="Self.FK__HISTORIAL__IDPro__797309D9" FromRole="PRODUCTOS" ToRole="HISTORIALVENTAS" />
+          <NavigationProperty Name="INVENTARIOs" Relationship="Self.FK__INVENTARI__Fecha__70DDC3D8" FromRole="PRODUCTOS" ToRole="INVENTARIO" />
+          <NavigationProperty Name="PROVEEDORE" Relationship="Self.FK__PRODUCTOS__IDPro__6E01572D" FromRole="PRODUCTOS" ToRole="PROVEEDORES" />
+          <NavigationProperty Name="VENTASPRODUCTOS" Relationship="Self.FK__VENTASPRO__IDPro__74AE54BC" FromRole="PRODUCTOS" ToRole="VENTASPRODUCTOS" />
+        </EntityType>
+        <EntityType Name="PROVEEDORE">
+          <Key>
+            <PropertyRef Name="IDProveedor" />
+          </Key>
+          <Property Name="IDProveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombreproveedor" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="Int64" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK__PRODUCTOS__IDPro__6E01572D" FromRole="PROVEEDORES" ToRole="PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="SERVICIO">
+          <Key>
+            <PropertyRef Name="IDServicio" />
+          </Key>
+          <Property Name="IDServicio" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Tarifa" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="INYECTOLOGIAs" Relationship="Self.FK__INYECTOLO__IDSer__3F466844" FromRole="SERVICIOS" ToRole="INYECTOLOGIA" />
+        </EntityType>
+        <EntityType Name="SUCURSAL">
+          <Key>
+            <PropertyRef Name="IDSucursal" />
+          </Key>
+          <Property Name="IDSucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreSucursal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FARMACEUTAs" Relationship="Self.FK__FARMACEUT__IDSuc__398D8EEE" FromRole="SUCURSAL" ToRole="FARMACEUTA" />
+          <NavigationProperty Name="INVENTARIOs" Relationship="Self.FK__INVENTARI__IDSuc__71D1E811" FromRole="SUCURSAL" ToRole="INVENTARIO" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="IDVenta" />
+          </Key>
+          <Property Name="IDVenta" Type="Int32" Nullable="false" />
+          <Property Name="FechaVenta" Type="DateTime" Precision="0" />
+          <Property Name="IDCliente" Type="Int32" />
+          <Property Name="TotalVenta" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__VENTAS__IDClient__4F7CD00D" FromRole="VENTAS" ToRole="CLIENTES" />
+          <NavigationProperty Name="PAGOS" Relationship="Self.FK__PAGOS__ValorPago__5CD6CB2B" FromRole="VENTAS" ToRole="PAGOS" />
+          <NavigationProperty Name="VENTASPRODUCTOS" Relationship="Self.FK__VENTASPRO__IDVen__75A278F5" FromRole="VENTAS" ToRole="VENTASPRODUCTOS" />
+        </EntityType>
+        <EntityType Name="VENTASPRODUCTO">
+          <Key>
+            <PropertyRef Name="IDVenta" />
+            <PropertyRef Name="IDProducto" />
+          </Key>
+          <Property Name="IDVenta" Type="Int32" Nullable="false" />
+          <Property Name="IDProducto" Type="Int32" Nullable="false" />
+          <Property Name="CantidadVendida" Type="Int32" />
+          <Property Name="SubTotal" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__VENTASPRO__IDPro__74AE54BC" FromRole="VENTASPRODUCTOS" ToRole="PRODUCTOS" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTASPRO__IDVen__75A278F5" FromRole="VENTASPRODUCTOS" ToRole="VENTAS" />
+        </EntityType>
+        <Association Name="FK__PRODUCTOS__IDCat__6D0D32F4">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DESCUENTO__Fecha__59FA5E80">
+          <End Role="CLIENTES" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="DESCUENTOS" Type="Self.DESCUENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="DESCUENTOS">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DOMICILIO__IDCli__5FB337D6">
+          <End Role="CLIENTES" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="DOMICILIOS" Type="Self.DOMICILIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="DOMICILIOS">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__Valor__787EE5A0">
+          <End Role="CLIENTES" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="HISTORIALVENTAS" Type="Self.HISTORIALVENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="HISTORIALVENTAS">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTAS__IDClient__4F7CD00D">
+          <End Role="CLIENTES" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="VENTAS" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="VENTAS">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FARMACEUT__IDSuc__398D8EEE">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="FARMACEUTA" Type="Self.FARMACEUTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="IDSucursal" />
+            </Principal>
+            <Dependent Role="FARMACEUTA">
+              <PropertyRef Name="IDSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INYECTOLO__IDFar__3E52440B">
+          <End Role="FARMACEUTA" Type="Self.FARMACEUTA" Multiplicity="1" />
+          <End Role="INYECTOLOGIA" Type="Self.INYECTOLOGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FARMACEUTA">
+              <PropertyRef Name="IDFarmaceuta" />
+            </Principal>
+            <Dependent Role="INYECTOLOGIA">
+              <PropertyRef Name="IDFarmaceuta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__IDPro__797309D9">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="HISTORIALVENTAS" Type="Self.HISTORIALVENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="HISTORIALVENTAS">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTARI__Fecha__70DDC3D8">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="INVENTARIO" Type="Self.INVENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="INVENTARIO">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTARI__IDSuc__71D1E811">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="INVENTARIO" Type="Self.INVENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="IDSucursal" />
+            </Principal>
+            <Dependent Role="INVENTARIO">
+              <PropertyRef Name="IDSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INYECTOLO__IDSer__3F466844">
+          <End Role="SERVICIOS" Type="Self.SERVICIO" Multiplicity="1" />
+          <End Role="INYECTOLOGIA" Type="Self.INYECTOLOGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="IDServicio" />
+            </Principal>
+            <Dependent Role="INYECTOLOGIA">
+              <PropertyRef Name="IDServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PAGOS__ValorPago__5CD6CB2B">
+          <End Role="VENTAS" Type="Self.VENTA" Multiplicity="0..1" />
+          <End Role="PAGOS" Type="Self.PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTAS">
+              <PropertyRef Name="IDVenta" />
+            </Principal>
+            <Dependent Role="PAGOS">
+              <PropertyRef Name="IDVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTOS__IDPro__6E01572D">
+          <End Role="PROVEEDORES" Type="Self.PROVEEDORE" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDORES">
+              <PropertyRef Name="IDProveedor" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="IDProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTASPRO__IDPro__74AE54BC">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="VENTASPRODUCTOS" Type="Self.VENTASPRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="VENTASPRODUCTOS">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTASPRO__IDVen__75A278F5">
+          <End Role="VENTAS" Type="Self.VENTA" Multiplicity="1" />
+          <End Role="VENTASPRODUCTOS" Type="Self.VENTASPRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTAS">
+              <PropertyRef Name="IDVenta" />
+            </Principal>
+            <Dependent Role="VENTASPRODUCTOS">
+              <PropertyRef Name="IDVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDFarmaciaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CATEGORIAs" EntityType="Self.CATEGORIA" />
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTE" />
+          <EntitySet Name="DESCUENTOS" EntityType="Self.DESCUENTO" />
+          <EntitySet Name="DOMICILIOS" EntityType="Self.DOMICILIO" />
+          <EntitySet Name="FARMACEUTAs" EntityType="Self.FARMACEUTA" />
+          <EntitySet Name="HISTORIALVENTAS" EntityType="Self.HISTORIALVENTA" />
+          <EntitySet Name="INVENTARIOs" EntityType="Self.INVENTARIO" />
+          <EntitySet Name="INYECTOLOGIAs" EntityType="Self.INYECTOLOGIA" />
+          <EntitySet Name="PAGOS" EntityType="Self.PAGO" />
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="PROVEEDORES" EntityType="Self.PROVEEDORE" />
+          <EntitySet Name="SERVICIOS" EntityType="Self.SERVICIO" />
+          <EntitySet Name="SUCURSALs" EntityType="Self.SUCURSAL" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="VENTAS" EntityType="Self.VENTA" />
+          <EntitySet Name="VENTASPRODUCTOS" EntityType="Self.VENTASPRODUCTO" />
+          <AssociationSet Name="FK__PRODUCTOS__IDCat__6D0D32F4" Association="Self.FK__PRODUCTOS__IDCat__6D0D32F4">
+            <End Role="CATEGORIA" EntitySet="CATEGORIAs" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DESCUENTO__Fecha__59FA5E80" Association="Self.FK__DESCUENTO__Fecha__59FA5E80">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="DESCUENTOS" EntitySet="DESCUENTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DOMICILIO__IDCli__5FB337D6" Association="Self.FK__DOMICILIO__IDCli__5FB337D6">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="DOMICILIOS" EntitySet="DOMICILIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__Valor__787EE5A0" Association="Self.FK__HISTORIAL__Valor__787EE5A0">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="HISTORIALVENTAS" EntitySet="HISTORIALVENTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTAS__IDClient__4F7CD00D" Association="Self.FK__VENTAS__IDClient__4F7CD00D">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="VENTAS" EntitySet="VENTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FARMACEUT__IDSuc__398D8EEE" Association="Self.FK__FARMACEUT__IDSuc__398D8EEE">
+            <End Role="SUCURSAL" EntitySet="SUCURSALs" />
+            <End Role="FARMACEUTA" EntitySet="FARMACEUTAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INYECTOLO__IDFar__3E52440B" Association="Self.FK__INYECTOLO__IDFar__3E52440B">
+            <End Role="FARMACEUTA" EntitySet="FARMACEUTAs" />
+            <End Role="INYECTOLOGIA" EntitySet="INYECTOLOGIAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__IDPro__797309D9" Association="Self.FK__HISTORIAL__IDPro__797309D9">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="HISTORIALVENTAS" EntitySet="HISTORIALVENTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTARI__Fecha__70DDC3D8" Association="Self.FK__INVENTARI__Fecha__70DDC3D8">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="INVENTARIO" EntitySet="INVENTARIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTARI__IDSuc__71D1E811" Association="Self.FK__INVENTARI__IDSuc__71D1E811">
+            <End Role="SUCURSAL" EntitySet="SUCURSALs" />
+            <End Role="INVENTARIO" EntitySet="INVENTARIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INYECTOLO__IDSer__3F466844" Association="Self.FK__INYECTOLO__IDSer__3F466844">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="INYECTOLOGIA" EntitySet="INYECTOLOGIAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PAGOS__ValorPago__5CD6CB2B" Association="Self.FK__PAGOS__ValorPago__5CD6CB2B">
+            <End Role="VENTAS" EntitySet="VENTAS" />
+            <End Role="PAGOS" EntitySet="PAGOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTOS__IDPro__6E01572D" Association="Self.FK__PRODUCTOS__IDPro__6E01572D">
+            <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTASPRO__IDPro__74AE54BC" Association="Self.FK__VENTASPRO__IDPro__74AE54BC">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="VENTASPRODUCTOS" EntitySet="VENTASPRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTASPRO__IDVen__75A278F5" Association="Self.FK__VENTASPRO__IDVen__75A278F5">
+            <End Role="VENTAS" EntitySet="VENTAS" />
+            <End Role="VENTASPRODUCTOS" EntitySet="VENTASPRODUCTOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDFarmaciaModelStoreContainer" CdmEntityContainer="BDFarmaciaEntities">
+          <EntitySetMapping Name="CATEGORIAs">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.CATEGORIA">
+              <MappingFragment StoreEntitySet="CATEGORIA">
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="Nombrecategoria" ColumnName="Nombrecategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTES">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTES">
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DESCUENTOS">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.DESCUENTO">
+              <MappingFragment StoreEntitySet="DESCUENTOS">
+                <ScalarProperty Name="IDDescuento" ColumnName="IDDescuento" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="PorcentajeDescuento" ColumnName="PorcentajeDescuento" />
+                <ScalarProperty Name="FechaExpiracion" ColumnName="FechaExpiracion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOMICILIOS">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.DOMICILIO">
+              <MappingFragment StoreEntitySet="DOMICILIOS">
+                <ScalarProperty Name="IDDomicilios" ColumnName="IDDomicilios" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="DireccionEntrega" ColumnName="DireccionEntrega" />
+                <ScalarProperty Name="TotalPago" ColumnName="TotalPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FARMACEUTAs">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.FARMACEUTA">
+              <MappingFragment StoreEntitySet="FARMACEUTA">
+                <ScalarProperty Name="IDFarmaceuta" ColumnName="IDFarmaceuta" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="IDSucursal" ColumnName="IDSucursal" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="FechaContratacion" ColumnName="FechaContratacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORIALVENTAS">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.HISTORIALVENTA">
+              <MappingFragment StoreEntitySet="HISTORIALVENTAS">
+                <ScalarProperty Name="IDHistorial" ColumnName="IDHistorial" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="CantidadComprada" ColumnName="CantidadComprada" />
+                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVENTARIOs">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.INVENTARIO">
+              <MappingFragment StoreEntitySet="INVENTARIO">
+                <ScalarProperty Name="IDInventario" ColumnName="IDInventario" />
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="IDSucursal" ColumnName="IDSucursal" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INYECTOLOGIAs">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.INYECTOLOGIA">
+              <MappingFragment StoreEntitySet="INYECTOLOGIA">
+                <ScalarProperty Name="IDInyectologia" ColumnName="IDInyectologia" />
+                <ScalarProperty Name="IDServicio" ColumnName="IDServicio" />
+                <ScalarProperty Name="IDFarmaceuta" ColumnName="IDFarmaceuta" />
+                <ScalarProperty Name="FechaInyeccion" ColumnName="FechaInyeccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAGOS">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.PAGO">
+              <MappingFragment StoreEntitySet="PAGOS">
+                <ScalarProperty Name="IDPago" ColumnName="IDPago" />
+                <ScalarProperty Name="IDVenta" ColumnName="IDVenta" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="ValorPago" ColumnName="ValorPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTOS">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTOS">
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="IDProveedor" ColumnName="IDProveedor" />
+                <ScalarProperty Name="Nombreproducto" ColumnName="Nombreproducto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Presentacion" ColumnName="Presentacion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVEEDORES">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.PROVEEDORE">
+              <MappingFragment StoreEntitySet="PROVEEDORES">
+                <ScalarProperty Name="IDProveedor" ColumnName="IDProveedor" />
+                <ScalarProperty Name="Nombreproveedor" ColumnName="Nombreproveedor" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICIOS">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.SERVICIO">
+              <MappingFragment StoreEntitySet="SERVICIOS">
+                <ScalarProperty Name="IDServicio" ColumnName="IDServicio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Tarifa" ColumnName="Tarifa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUCURSALs">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.SUCURSAL">
+              <MappingFragment StoreEntitySet="SUCURSAL">
+                <ScalarProperty Name="IDSucursal" ColumnName="IDSucursal" />
+                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTAS">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.VENTA">
+              <MappingFragment StoreEntitySet="VENTAS">
+                <ScalarProperty Name="IDVenta" ColumnName="IDVenta" />
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="TotalVenta" ColumnName="TotalVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTASPRODUCTOS">
+            <EntityTypeMapping TypeName="BDFarmaciaModel.VENTASPRODUCTO">
+              <MappingFragment StoreEntitySet="VENTASPRODUCTOS">
+                <ScalarProperty Name="IDVenta" ColumnName="IDVenta" />
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="CantidadVendida" ColumnName="CantidadVendida" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

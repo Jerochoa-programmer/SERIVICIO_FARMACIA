@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="574cdd50a9ac4b038f34686190419540" Name="Diagram1">
+        <EntityTypeShape EntityType="BDFarmaciaModel.CATEGORIA" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.CLIENTE" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.DESCUENTO" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.DOMICILIO" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.FARMACEUTA" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.HISTORIALVENTA" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.INVENTARIO" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.INYECTOLOGIA" Width="1.5" PointX="10.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.PAGO" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.PRODUCTO" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.PROVEEDORE" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.SERVICIO" Width="1.5" PointX="8.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.SUCURSAL" Width="1.5" PointX="6" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.VENTA" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFarmaciaModel.VENTASPRODUCTO" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__PRODUCTOS__IDCat__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__DESCUENTO__Fecha__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__DOMICILIO__IDCli__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__HISTORIAL__Valor__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__VENTAS__IDClient__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__FARMACEUT__IDSuc__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__INYECTOLO__IDFar__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__HISTORIAL__IDPro__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__INVENTARI__Fecha__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__INVENTARI__IDSuc__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__INYECTOLO__IDSer__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__PAGOS__ValorPago__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__PRODUCTOS__IDPro__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__VENTASPRO__IDPro__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFarmaciaModel.FK__VENTASPRO__IDVen__75A278F5" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
